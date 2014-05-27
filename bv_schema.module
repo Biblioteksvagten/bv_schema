@@ -298,13 +298,13 @@ function bv_schema_node_form_submit($form, &$form_state) {
         '',
         '',
       );
-      
+
       $monday_times = array(
         'SDUB:<br /> 9.30-12',
         'SB:<br /> 12-15',
       );
 
-      
+
       $tuesday_times = array(
         'RUB:<br /> 9-12',
         'AUB:<br /> 12-15',
@@ -313,24 +313,24 @@ function bv_schema_node_form_submit($form, &$form_state) {
         'CBSB:<br /> 9-12',
         'SB:<br /> 13-15',
       );
-      
+
       $thursday_times = array(
         'CBSB:<br /> 9-11',
         'VIA TEK:<br /> 13-15',
       );
-     
+
       $friday_times = array(
         'SDUB:<br /> 10-12',
         'AUB:<br /> 13-15',
       );
-      
+
       foreach ($times as $key => $time) {
-        $rows[] = array(      
+        $rows[] = array(
           isset($monday_times[$key]) ? $monday_times[$key] . ' ' . $v['forsk']['monday'][$key] : '',
           isset($tuesday_times[$key]) ? $tuesday_times[$key] . ' ' . $v['forsk']['tuesday'][$key] : '',
-          isset($wedensday_times[$key]) ? $wedensday_times[$key] . ' ' . $v['forsk']['wedensday'][$key] : '', 
-          isset($thursday_times[$key]) ? $thursday_times[$key] . ' ' . $v['forsk']['thursday'][$key] : '', 
-          isset($friday_times[$key]) ? $friday_times[$key] . ' ' . $v['forsk']['friday'][$key] : '', 
+          isset($wedensday_times[$key]) ? $wedensday_times[$key] . ' ' . $v['forsk']['wedensday'][$key] : '',
+          isset($thursday_times[$key]) ? $thursday_times[$key] . ' ' . $v['forsk']['thursday'][$key] : '',
+          isset($friday_times[$key]) ? $friday_times[$key] . ' ' . $v['forsk']['friday'][$key] : '',
          );
       }
       $rows[] = $row;
@@ -359,7 +359,7 @@ function bv_schema_node_form_submit($form, &$form_state) {
         '12-15',
         '15-17',
         '17-20',
-        
+
       );
       $sat_times = array(
         '08-12',
@@ -383,6 +383,13 @@ function bv_schema_node_form_submit($form, &$form_state) {
       }
     }
 
-    $form_state['values']['body']['und'][0]['value'] = theme('table', array('header' => $header, 'rows' => $rows));
+    $table_def = array(
+      'header' => $header,
+      'rows' => $rows,
+      'attributes' => array(
+        'class' => array('bibvagt-schema'),
+      ),
+    );
+    $form_state['values']['body']['und'][0]['value'] = theme('table', $table_def);
   }
 }
